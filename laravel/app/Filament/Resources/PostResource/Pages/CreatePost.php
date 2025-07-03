@@ -17,4 +17,20 @@ class CreatePost extends CreateRecord
     
         return $data;
     }
+
+    protected function afterCreate(): void
+{
+    $images = $this->form->getState()['featured_image'] ?? null;
+
+    if ($images) {
+        foreach ((array) $images as $image) {
+            $this->record
+                ->addMedia($image)
+                ->toMediaCollection('featured_image'); // sesuaikan nama koleksi
+        }
+    }
 }
+
+
+}
+
