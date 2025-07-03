@@ -15,9 +15,21 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        $super_admin = User::whare('email', 'superadmin@local.com')->first();
+
+        if(empty($super_admin)){
+            User::create([
+                'name' => 'Super Admin',
+                'email' => 'superadmin@local.com',
+                'password' => Hash::make('1212'),
+            ]); 
+        }
+            
+        
     }
 }
